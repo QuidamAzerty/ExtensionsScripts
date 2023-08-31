@@ -2,9 +2,10 @@
 // @name			Best stats total
 // @description		Display BST
 // @namespace		http://tampermonkey.net/
-// @version			1.0
+// @version			1.1
 // @author			QuidamAzerty
 // @match			https://coupcritique.fr/entity/pokemons/*
+// @icon			https://coupcritique.fr/favicon.ico
 // @grant			none
 // ==/UserScript==
 
