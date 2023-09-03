@@ -2,9 +2,9 @@
 // @name			Best stats total
 // @description		Display BST
 // @namespace		http://tampermonkey.net/
-// @version			1.1
+// @version			1.2
 // @author			QuidamAzerty
-// @match			https://coupcritique.fr/entity/pokemons/*
+// @match			https://coupcritique.fr/*
 // @icon			https://coupcritique.fr/favicon.ico
 // @grant			none
 // ==/UserScript==
@@ -25,6 +25,9 @@ const MAX_BST = 780;
 })();
 
 function displayBst() {
+	if (!window.location.href.includes('https://coupcritique.fr/entity/pokemons/')) {
+		return;
+	}
 	const tableStats = document.querySelector('.table-stat');
 	if (!tableStats) {
 		return;
