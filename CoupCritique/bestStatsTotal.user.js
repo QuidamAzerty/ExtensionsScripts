@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name			Best stats total
 // @description		Display BST
-// @namespace		http://tampermonkey.net/
+// @namespace		CoupCritique
 // @version			1.2
 // @author			QuidamAzerty
 // @match			https://coupcritique.fr/*
