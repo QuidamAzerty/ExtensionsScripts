@@ -19,17 +19,6 @@ let fflogsLastFightIndex = null;
 (function () {
 	'use strict';
 
-	const url = window.location.href;
-
-	if (url.includes('fflogs.com')) {
-		displayLinkOnFflogs();
-	} else if (url.includes('ffxiv-fightline.com')) {
-		displayLinkOnFightline();
-	}
-
-})();
-
-function displayLinkOnFflogs() {
 	(new MutationObserver(check)).observe(document, {childList: true, subtree: true});
 
 	function check(changes, observer) {
@@ -38,8 +27,7 @@ function displayLinkOnFflogs() {
 			fflogsInit();
 		}
 	}
-
-}
+})();
 
 function fflogsInit() {
 	const url = window.location.href;
