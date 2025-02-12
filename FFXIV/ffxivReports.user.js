@@ -2,7 +2,7 @@
 // @name			FFLogs & XIVAnalysis links
 // @description		Add on mentioned websites links to others
 // @namespace		FFXIV
-// @version			1.0
+// @version			1.1
 // @author			QuidamAzerty
 // @match			https://*.fflogs.com/reports/*
 // @grant			none
@@ -55,7 +55,7 @@ function fflogsInit() {
 	xivAnalysisLink.rel = 'noopener';
 	xivAnalysisLink.style.color = 'white';
 	xivAnalysisLink.innerHTML = '<img src="https://xivanalysis.com/logo.png" width="14" alt="logo">To xivanalysis';
-	xivAnalysisLink.setAttribute('data-base-href', 'https://xivanalysis.com/find');
+	xivAnalysisLink.setAttribute('data-base-href', 'https://xivanalysis.com/fflogs');
 
 	ffLogsUpdateLinks([xivAnalysisLink], reportId, fightIndex);
 
