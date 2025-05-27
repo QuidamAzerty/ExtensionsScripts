@@ -1,0 +1,27 @@
+/* ==UserStyle==
+@name			Twitch
+@description	Less flashy chain points button
+@namespace		misc
+@version		1.0
+@author			QuidamAzerty
+==/UserStyle==
+
+/*
+@-moz-document
+
+url('https://www.example.com/')
+url-prefix('https://www.example.com/')
+domain('example.com'),
+media-document('video'),
+regexp('https:.*') 
+*/
+
+@-moz-document domain('twitch.tv') {
+	:root {
+		--color-background-button-success: var(--color-background-button-primary-default);
+	}
+
+	.tw-button--success {
+		background-color: var(--color-background-button-primary-default);
+	}
+}

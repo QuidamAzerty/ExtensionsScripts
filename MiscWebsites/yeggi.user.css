@@ -1,0 +1,27 @@
+/* ==UserStyle==
+@name			Yeggi
+@description	Center content on search
+@namespace		misc
+@version		1.0
+@author			QuidamAzerty
+==/UserStyle==
+
+/*
+@-moz-document
+
+url('https://www.example.com/')
+url-prefix('https://www.example.com/')
+domain('example.com'),
+media-document('video'),
+regexp('https:.*') 
+*/
+
+@-moz-document domain('yeggi.com') {
+	#bdy {
+		margin: auto;
+	}
+
+	#c_main {
+		margin: auto !important;
+	}
+}
