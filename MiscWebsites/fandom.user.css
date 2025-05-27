@@ -4,9 +4,11 @@
 @namespace		misc
 @version		1.0
 @author			QuidamAzerty
-==/UserScript==
+==/UserStyle==
 
 /*
+@-moz-document
+
 url("https://www.example.com/")
 url-prefix("https://www.example.com/")
 domain("example.com"),
@@ -14,7 +16,7 @@ media-document("video"),
 regexp("https:.*") 
 */
 
-@document domain('fandom.com') {
+@-moz-document domain('fandom.com') {
 	:root {
 		--desktop-global-navigation-width: 66px !important;
 	}
