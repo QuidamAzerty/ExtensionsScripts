@@ -19,9 +19,6 @@ regexp('https:.*')
 @-moz-document domain('twitch.tv') {
 	:root {
 		--color-background-button-success: var(--color-background-button-primary-default);
-	}
-
-	.tw-button--success {
-		background-color: var(--color-background-button-primary-default);
+		--color-background-button-success-hover: var(--color-background-button-primary-default);
 	}
 }
