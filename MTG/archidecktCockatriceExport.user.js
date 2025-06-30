@@ -2,7 +2,7 @@
 // @name			Archidekt Cockatrice deck export
 // @description		Export a deck on Archidekt for Cockatrice
 // @namespace		MTG
-// @version			1.0
+// @version			1.1
 // @author			QuidamAzerty
 // @match			https://archidekt.com/decks/*
 // @icon			https://archidekt.com/favicon.ico
@@ -30,12 +30,23 @@ const SIDEBOARD_NAME = 'Sideboard';
 (function () {
 	'use strict';
 
+	putButton();
+	setTimeout(() => {
+		putButton();
+	}, 1000)
+})();
+
+function putButton() {
+	if (document.getElementById('exportToCocatrixButton')) {
+		return;
+	}
 	// Add copy button
 	const buttonContainer = document.querySelector('[class*="deckHeader_primaryActions"]');
 	const buttonClass = buttonContainer.querySelector('button').className;
 
 	const copyButton = document.createElement('button');
 	buttonContainer.append(copyButton);
+	copyButton.id = 'exportToCocatrixButton';
 	copyButton.className = buttonClass;
 	copyButton.innerHTML = `
 		<i aria-hidden="true" class="download icon"></i>
@@ -105,5 +116,4 @@ const SIDEBOARD_NAME = 'Sideboard';
 
 		alert('Deck exported !');
 	});
-
-})();
+}
