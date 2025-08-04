@@ -2,9 +2,9 @@
 // @name			Archidekt Cockatrice deck export
 // @description		Export a deck on Archidekt for Cockatrice
 // @namespace		MTG
-// @version			1.1
+// @version			1.2
 // @author			QuidamAzerty
-// @match			https://archidekt.com/decks/*
+// @match			https://archidekt.com/*
 // @icon			https://archidekt.com/favicon.ico
 // @grant			none
 // ==/UserScript==
@@ -22,8 +22,6 @@ class MtgCard {
 	}
 }
 
-// TODO ONLY WORK IF STACKS MODE
-
 const MAYBEBOARD_NAME = 'Maybeboard';
 const SIDEBOARD_NAME = 'Sideboard';
 
@@ -31,15 +29,26 @@ const SIDEBOARD_NAME = 'Sideboard';
 	'use strict';
 
 	putButton();
-	setTimeout(() => {
-		putButton();
-	}, 1000)
+	const observer = new MutationObserver(putButton);
+	observer.observe(document.body, {
+		childList: true,
+		subtree: true
+	});
+
 })();
 
 function putButton() {
+	// Only woks on deck
+	const urlFirstPath =  (new URL(window.location)).pathname.split('/')[1] ?? null;
+	if (urlFirstPath !== 'decks') {
+		return;
+	}
+
+	// Debounce
 	if (document.getElementById('exportToCocatrixButton')) {
 		return;
 	}
+
 	// Add copy button
 	const buttonContainer = document.querySelector('[class*="deckHeader_primaryActions"]');
 	const buttonClass = buttonContainer.querySelector('button').className;
@@ -53,15 +62,23 @@ function putButton() {
 		Export deck for Cockatrice
 	`;
 	copyButton.addEventListener('click', () => {
+		const deckContainer = document.querySelector('div[class*="deckContainerV2_container"]');
+		const cardAsImages = deckContainer.querySelectorAll('[class*="basicCard_image"]');
+		if (cardAsImages.length === 0) {
+			alert('Only Stacks and Grid view work for export (elsewise, the printing version cannot be found)');
+			return;
+		}
+
 		// Retrieve cards
 		/** @type {Object<string, Object<string, MtgCard>>} */
 		const cardsByCategoryByName = {};
-		document.querySelectorAll('[class*="basicCard_image"]').forEach(img => {
+		cardAsImages.forEach(img => {
 			const wrapper = img.closest('[class*="deckCardWrapper_container"]');
 			// Tokens do not have wrappers
 			if (wrapper) {
 				const card = new MtgCard(
 					img.title,
+					// Printing version is in it
 					wrapper.closest('[class*="stackWrapper_container"]').querySelector('[class*="stackHeader_container"] [class*="stackHeader_title"]').textContent,
 					parseInt(wrapper.querySelector('[class*="cornerQuantity_cornerQuantity"]').textContent),
 				);
@@ -114,6 +131,26 @@ function putButton() {
 		// And copy !
 		navigator.clipboard.writeText(exportParts.join('\n'));
 
-		alert('Deck exported !');
+		showToast('Deck exported !');
 	});
+}
+
+function showToast(message) {
+	const toast = document.createElement('div');
+	toast.style.cssText = `
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		background-color: #333;
+		color: white;
+		padding: 15px;
+		border-radius: 4px;
+		z-index: 9999;
+	`;
+	toast.textContent = message;
+	document.body.appendChild(toast);
+
+	setTimeout(() => {
+		toast.remove();
+	}, 10000);
 }
