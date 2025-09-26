@@ -2,9 +2,10 @@
 // @name			Kobo - Select all button
 // @description		Add a button to select all rewards of the page
 // @namespace		misc
-// @version			1.0
+// @version			1.1
 // @author			QuidamAzerty
 // @match			https://www.kobo.com/*/promotionalreward/*
+// @icon			https://static.kobo.com/1.0.0.0/Images/favicon/favicon.ico
 // @grant			none
 // ==/UserScript==
 
@@ -12,12 +13,13 @@
 	'use strict';
 
 	const rewardClaimButton = document.getElementById('user-reward-claim-cta');
-	if (!rewardClaimButton) {
+	const rewardClaimInput = document.getElementById('user-reward-claim-input');
+	if (!rewardClaimButton || !rewardClaimInput) {
 		return;
 	}
 
 	const selectAllButton = document.createElement('button');
-	rewardClaimButton.parentNode.insertBefore(selectAllButton, rewardClaimButton);
+	rewardClaimInput.parentNode.insertBefore(selectAllButton, rewardClaimInput);
 
 	selectAllButton.type = 'button';
 	selectAllButton.classList = rewardClaimButton.classList;
@@ -25,7 +27,7 @@
 	selectAllButton.textContent = 'Select All';
 	selectAllButton.addEventListener('click', () => {
 		document.querySelectorAll('.reward-selector').forEach(checkbox => checkbox.click());
-		document.getElementById('user-reward-claim-input').focus();
+		rewardClaimInput.focus();
 		return false;
 	});
 
